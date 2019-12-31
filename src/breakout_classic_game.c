@@ -11,9 +11,11 @@
 #if defined (__USE_LPCOPEN)
 #if defined(NO_BOARD_LIB)
 #include "chip.h"
-#else
 #include "board.h"
-#include "game_objets.h"
+#include <game_objects.h>
+#include <stdlib.h>
+#include <string.h>
+#include "task.h"
 #endif
 #endif
 
@@ -22,51 +24,56 @@
 // TODO: insert other include files here
 
 // TODO: insert other definitions and declarations here
-static void vRunGameTAsk(void *pvParameters)
+const char start =  "start";
+const char lose =  "lost";
+
+static void pvUART()
+{
+	Chip_UART_SendRB(UART_SELECTION, &txring, inst1, start);
+}
+
+static void prvSetupHardware(void)
+{
+	SystemCoreClockUpdate();
+	Board_Init();
+}
+
+static void vBarMovement(void *pvParameters){
+xSemaphoreTake( xMyMutex, portMAX_DELAY );
+{
+while(1)
+{
+	Buttons_GetStatus(); //gets status of the specific GPIO pins.
+	vTaskDelay(1000);
+}
+}
+xSemaphoreGive( xMutex );
+}
+static void vBallDeath(void *pvParameters)
 {
 }
-static void vImpactsTask(void *pvParameters)
+static void vBallMovement(void *pvParameters)
 {
+
 }
-static void vBlocksTask(void *pvParameters)
-{
-}
-static void vBallsTask(void *pvParameters)
-{
-}
-static void vPlayer(void *pvParameters)
-{
-}
+
+
 
 
 int main(void)
 {
+xMyMutex = xSemaphoreCreateMutex();
+	prvSetupHardware();
+		xTaskCreate(vBarMovement,(signed char*) "vRunGameTAsk",configMINIMAL_STACK_SIZE,NULL, 1, (xTaskHandle *)NULL);
 
 
-}
+		xTaskCreate(vBallDeath, (signed char*)"vImpactsTask",configMINIMAL_STACK_SIZE,NULL, 1, (xTaskHandle *)NULL);
 
 
-int main(void) {
+		xTaskCreate(vBallMovement, (signed char*)"vBlocksTask",configMINIMAL_STACK_SIZE,NULL, 1,(xTaskHandle *)NULL);
 
-#if defined (__USE_LPCOPEN)
-    // Read clock settings and update SystemCoreClock variable
-    SystemCoreClockUpdate();
-#if !defined(NO_BOARD_LIB)
-    // Set up and initialize all required blocks and
-    // functions related to the board hardware
-    Board_Init();
-    // Set the LED to the state of "On"
-    Board_LED_Set(0, true);
-#endif
-#endif
+		vTaskStartScheduler();
 
-    // TODO: insert code here
-
-    // Force the counter to be placed into memory
-    volatile static int i = 0 ;
-    // Enter an infinite loop, just incrementing a counter
-    while(1) {
-        i++ ;
-    }
-    return 0 ;
+		/* Should never arrive here */
+		return 1;
 }
