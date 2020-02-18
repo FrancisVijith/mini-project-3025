@@ -45,7 +45,7 @@ struct go_coord_struct
 	unsigned int Y;
 	unsigned int Xoff;
 	unsigned int Yoff;
-}go_coord_t;
+}go_coordinates_t;
 
 int main(void)
 {
