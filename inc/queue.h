@@ -81,7 +81,7 @@ extern "C" {
  * returns an xQueueHandle variable that can then be used as a parameter to
  * xQueueSend(), xQueueReceive(), etc.
  */
-typedef void * xQueueHandle;
+//typedef void * xQueueHandle;
 
 /**
  * Type by which queue sets are referenced.  For example, a call to
