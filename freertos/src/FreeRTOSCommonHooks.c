@@ -89,6 +89,6 @@ void vApplicationStackOverflowHook(xTaskHandle pxTask, signed char *pcTaskName)
 	for (;; ) {}
 }
 
-/* FreeRTOS application tick hook */
+//FreeRTOS application tick hook */
 void vApplicationTickHook(void)
 {}
