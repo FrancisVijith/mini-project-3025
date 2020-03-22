@@ -12,7 +12,7 @@ SW = southwest and SE = southeast
 #ifndef BALL_DSPLY_MVMNT_C_
 #define BALL_DSPLY_MVMNT_C_
 
-//#include "game_objects.h"
+#include "game_objects.h"
 
 unsigned int flag = 0;
 unsigned int display;
