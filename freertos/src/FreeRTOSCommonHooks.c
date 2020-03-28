@@ -27,7 +27,7 @@
  * is used in conjunction with NXP Semiconductors microcontrollers.  This
  * copyright, permission, and disclaimer notice must appear in all copies of
  * this code.
- */
+ 
 
 #include "FreeRTOS.h"
 #include "task.h"
