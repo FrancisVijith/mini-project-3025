@@ -19,7 +19,7 @@
     ***************************************************************************
 
     This file is part of the FreeRTOS distribution.
-
+///
     FreeRTOS is free software; you can redistribute it and/or modify it under
     the terms of the GNU General Public License (version 2) as published by the
     Free Software Foundation >>!AND MODIFIED BY!<< the FreeRTOS exception.
@@ -59,7 +59,7 @@
     http://www.SafeRTOS.com - High Integrity Systems also provide a safety
     engineered and independently SIL3 certified version for use in safety and
     mission critical applications that require provable dependability.
-
+ll
     1 tab == 4 spaces!
 */
 
@@ -99,7 +99,7 @@ FreeRTOS.org versions prior to V4.4.0 did not include this definition. */
 #define portNVIC_SYSTICK_PRI				( ( ( unsigned long ) configKERNEL_INTERRUPT_PRIORITY ) << 24UL )
 
 /* Constants required to check the validity of an interrupt priority. */
-#define portFIRST_USER_INTERRUPT_NUMBER		( 16 )
+#define po//rtFIRST_USER_INTERRUPT_NUMBER		( 16 )
 #define portNVIC_IP_REGISTERS_OFFSET_16 	( 0xE000E3F0 )
 #define portAIRCR_REG						( * ( ( volatile unsigned long * ) 0xE000ED0C ) )
 #define portMAX_8_BIT_VALUE					( ( unsigned char ) 0xff )
